@@ -6,6 +6,7 @@
     :license: MIT, see LICENSE for more details.
 """
 import os
+
 try:
     from urlparse import urlparse, urljoin
 except ImportError:
@@ -22,7 +23,7 @@ app.secret_key = os.getenv('SECRET_KEY', 'secret string')
 # get name value from query string and cookie
 @app.route('/')
 @app.route('/hello')
-def hello():
+def hello_weizhe():
     name = request.args.get('name')
     if name is None:
         name = request.cookies.get('name', 'Human')
@@ -38,7 +39,7 @@ def hello():
 # redirect
 @app.route('/hi')
 def hi():
-    return redirect(url_for('hello'))
+    return redirect(url_for('hello_weizhe'))
 
 
 # use int URL converter
