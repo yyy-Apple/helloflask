@@ -23,7 +23,7 @@ app.secret_key = os.getenv('SECRET_KEY', 'secret string')
 # get name value from query string and cookie
 @app.route('/')
 @app.route('/hello')
-def hello_weizhe():
+def hello_y():
     name = request.args.get('name')
     if name is None:
         name = request.cookies.get('name', 'Human')
@@ -39,7 +39,7 @@ def hello_weizhe():
 # redirect
 @app.route('/hi')
 def hi():
-    return redirect(url_for('hello_weizhe'))
+    return redirect(url_for('hello_y'))
 
 
 # use int URL converter
@@ -129,7 +129,7 @@ body: Don't forget the party!
 # set cookie
 @app.route('/set/<name>')
 def set_cookie(name):
-    response = make_response(redirect(url_for('hello')))
+    response = make_response(redirect(url_for('hello_y')))
     response.set_cookie('name', name)
     return response
 
@@ -138,7 +138,7 @@ def set_cookie(name):
 @app.route('/login')
 def login():
     session['logged_in'] = True
-    return redirect(url_for('hello'))
+    return redirect(url_for('hello_y'))
 
 
 # protect view
@@ -154,7 +154,7 @@ def admin():
 def logout():
     if 'logged_in' in session:
         session.pop('logged_in')
-    return redirect(url_for('hello'))
+    return redirect(url_for('hello_y'))
 
 
 # AJAX
